@@ -32,7 +32,7 @@ logging.info('Loaded dev, size={}, npos={}'.format(len(dev_exs), sum(dev_labels)
 model = BowModel(emb_dict.emb)
 loss_fn = nn.NLLLoss()
 optimized_params = filter(lambda p: p.requires_grad, model.parameters())
-optimizer = optim.Adam(optimized_params, lr=0.003)
+optimizer = optim.Adam(optimized_params, lr=0.001)
 
 
 def train_epoch():
