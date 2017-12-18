@@ -29,8 +29,7 @@ logging.info('Loaded train, size={}, npos={}'.format(len(train_exs), sum(train_l
 dev_exs, dev_labels = dataset.preprocess_dataset(data.dev, emb_dict.dictionary)
 logging.info('Loaded dev, size={}, npos={}'.format(len(dev_exs), sum(dev_labels).sum()))
 
-model = nn.LSTM(emb_dict.emb, **kwargs)
-# BowModel(emb_dict.emb)
+model = BowModel(emb_dict.emb)
 loss_fn = nn.NLLLoss()
 optimized_params = filter(lambda p: p.requires_grad, model.parameters())
 optimizer = optim.Adam(optimized_params, lr=0.003)
