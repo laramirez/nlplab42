@@ -10,7 +10,6 @@ from dataset import SifDataset
 from model import BowModel
 
 logger = logging.getLogger()
-# on met le niveau du logger à DEBUG, comme ça il écrit tout
 logger.setLevel(logging.INFO)
 
 fmt = logging.Formatter('%(asctime)s: %(message)s', '%m/%d/%Y %I:%M:%S %p')
@@ -30,7 +29,8 @@ logging.info('Loaded train, size={}, npos={}'.format(len(train_exs), sum(train_l
 dev_exs, dev_labels = dataset.preprocess_dataset(data.dev, emb_dict.dictionary)
 logging.info('Loaded dev, size={}, npos={}'.format(len(dev_exs), sum(dev_labels).sum()))
 
-model = BowModel(emb_dict.emb)
+model = nn.LSTM(emb_dict.emb, **kwargs)
+# BowModel(emb_dict.emb)
 loss_fn = nn.NLLLoss()
 optimized_params = filter(lambda p: p.requires_grad, model.parameters())
 optimizer = optim.Adam(optimized_params, lr=0.003)
